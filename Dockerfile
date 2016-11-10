@@ -3,8 +3,8 @@
 # Extended from github.com/jupyter/docker-stacks
 # See also http://blog.dscpl.com.au/2016/01/roundup-of-docker-issues-when-hosting.html
 
-# Debian Jessie image released 2016 May 03.
-FROM debian@sha256:32a225e412babcd54c0ea777846183c61003d125278882873fb2bc97f9057c51
+# Follow Aptible Debian releases
+FROM quay.io/aptible/debian:jessie
 
 MAINTAINER Nick Greenfield <nick@onecodex.com>
 
