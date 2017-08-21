@@ -102,26 +102,26 @@ RUN conda install --quiet --yes \
 RUN conda install --quiet --yes \
     'nomkl' \
     'ipywidgets=5.2*' \
-    'pandas=0.19*' \
+    'pandas=0.20*' \
     'numexpr=2.6*' \
-    'matplotlib=1.5*' \
-    'scipy=0.17*' \
-    'seaborn=0.7*' \
-    'scikit-learn=0.18*' \
-    'scikit-image=0.11*' \
-    'sympy=1.0*' \
-    'cython=0.23*' \
+    'matplotlib=2.0*' \
+    'scipy=0.19*' \
+    'seaborn=0.8*' \
+    'scikit-learn=0.19*' \
+    'scikit-image=0.13*' \
+    'sympy=1.1*' \
+    'cython=0.26*' \
     'patsy=0.4*' \
-    'statsmodels=0.6*' \
-    'cloudpickle=0.1*' \
+    'statsmodels=0.8*' \
+    'cloudpickle=0.2*' \
     'dill=0.2*' \
-    'numba=0.23*' \
-    'bokeh=0.11*' \
-    'sqlalchemy=1.0*' \
+    'numba=0.34*' \
+    'bokeh=0.12*' \
+    'sqlalchemy=1.1*' \
     'hdf5=1.8.17' \
-    'h5py=2.6*' \
+    'h5py=2.7*' \
     'vincent=0.4.*' \
-    'beautifulsoup4=4.5.*' \
+    'beautifulsoup4=4.6.*' \
     'xlrd'  && \
     conda remove --quiet --yes --force qt pyqt && \
     conda clean -tipsy && \
