@@ -161,6 +161,10 @@ RUN conda config --add channels r && \
     'r-randomforest=4.6*' && conda clean -tipsy && \
     chmod -R g+w $CONDA_DIR
 
+# Install certifi
+RUN pip install -U pip
+RUN pip install -U certifi
+
 # Set workdir
 USER root
 WORKDIR /home/$NB_USER/work
