@@ -122,7 +122,8 @@ RUN conda install --quiet --yes \
     'h5py=2.7*' \
     'vincent=0.4.*' \
     'beautifulsoup4=4.6.*' \
-    'xlrd'  && \
+    'xlrd'  \
+    'biopython=1.70' && \
     conda remove --quiet --yes --force qt pyqt && \
     conda clean -tipsy && \
     chmod -R g+w $CONDA_DIR
