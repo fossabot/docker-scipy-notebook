@@ -3,8 +3,7 @@
 # Extended from github.com/jupyter/docker-stacks
 # See also http://blog.dscpl.com.au/2016/01/roundup-of-docker-issues-when-hosting.html
 
-# Follow Aptible Debian releases
-FROM quay.io/aptible/debian:jessie
+FROM python:3.6.6-slim-stretch
 
 MAINTAINER Nick Greenfield <nick@onecodex.com>
 
@@ -25,10 +24,10 @@ RUN apt-get update && apt-get install -yq --no-install-recommends \
     python-dev \
     unzip \
     pandoc \
-    texlive-latex-base \
-    texlive-xetex \
-    texlive-fonts-recommended \
-    texlive-generic-recommended \
+#    texlive-latex-base \
+#    texlive-xetex \
+#    texlive-fonts-recommended \
+#    texlive-generic-recommended \
     libav-tools \
     fonts-dejavu \
     gfortran \
@@ -76,11 +75,11 @@ RUN mkdir /home/$NB_USER/work && \
 # Also ensure /opt/conda is writeable by group (so installs are possible there)
 # We do this here so we don't get an additional layer in the image later
 RUN cd /tmp && \
-    wget --quiet https://repo.continuum.io/miniconda/Miniconda3-4.1.11-Linux-x86_64.sh && \
-    echo "efd6a9362fc6b4085f599a881d20e57de628da8c1a898c08ec82874f3bad41bf *Miniconda3-4.1.11-Linux-x86_64.sh" | sha256sum -c - && \
-    /bin/bash Miniconda3-4.1.11-Linux-x86_64.sh -f -b -p $CONDA_DIR && \
-    rm Miniconda3-4.1.11-Linux-x86_64.sh && \
-    $CONDA_DIR/bin/conda install --quiet --yes conda==4.1.11 && \
+    wget --quiet https://repo.continuum.io/miniconda/Miniconda3-4.5.4-Linux-x86_64.sh && \
+    echo "80ecc86f8c2f131c5170e43df489514f80e3971dd105c075935470bbf2476dea *Miniconda3-4.5.4-Linux-x86_64.sh" | sha256sum -c - && \
+    /bin/bash Miniconda3-4.5.4-Linux-x86_64.sh -f -b -p $CONDA_DIR && \
+    rm Miniconda3-4.5.4-Linux-x86_64.sh && \
+    $CONDA_DIR/bin/conda install --quiet --yes conda==4.5.4 && \
     $CONDA_DIR/bin/conda config --system --add channels conda-forge && \
     $CONDA_DIR/bin/conda config --system --set auto_update_conda false && \
     conda clean -tipsy && \
@@ -92,7 +91,7 @@ RUN echo "jpeg 8*" >> /opt/conda/conda-meta/pinned
 
 # Install Jupyter notebook as jovyan
 RUN conda install --quiet --yes \
-    'notebook=4.3*' \
+    'notebook=5.2.1' \
     && conda clean -tipsy && \
     chmod -R g+w $CONDA_DIR
 
@@ -165,6 +164,9 @@ RUN conda config --add channels r && \
 # Install certifi
 RUN pip install -U pip
 RUN pip install -U certifi
+
+# Later versions break Jupyter
+RUN pip install tornado==4.5.3
 
 # Set workdir
 USER root
